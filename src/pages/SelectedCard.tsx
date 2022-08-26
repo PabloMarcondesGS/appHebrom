@@ -34,7 +34,7 @@ export const SelectedCard: React.FC = () => {
             const contratoBeneficiario = await AsyncStorage.getItem('contract');
             const controleBeneficiario = await AsyncStorage.getItem('controleBeneficiario');
       
-            api.post('/cartBenef', { contratoBeneficiario: contratoBeneficiario, controleBeneficiario: controleBeneficiario } , {
+            api.post('/cartBenef', { contratoBeneficiario: contratoBeneficiario?.split('-')[1].toString(), controleBeneficiario: controleBeneficiario } , {
               headers: { Authorization: `Bearer ${token}` }
             })
             .then(async (response) => {

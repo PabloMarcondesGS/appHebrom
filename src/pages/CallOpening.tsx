@@ -27,7 +27,7 @@ export const CallOpening: React.FC = () => {
             const token = await AsyncStorage.getItem('tokenUser');
             const contract = await AsyncStorage.getItem('contract');
       
-            api.post('/sac', { contrato: contract } , {
+            api.post('/sac', { contrato: contract?.split('-')[1].toString() } , {
               headers: { Authorization: `Bearer ${token}` }
             })
             .then(async (response) => {

@@ -24,7 +24,7 @@ export const DigitalCard: React.FC = () => {
             const token = await AsyncStorage.getItem('tokenUser');
             const contract = await AsyncStorage.getItem('contract');
       
-            api.post('/contratobenef', { contratoBeneficiario: contract } , {
+            api.post('/contratobenef', { contratoBeneficiario: contract?.split('-')[1].toString() } , {
               headers: { Authorization: `Bearer ${token}` }
             })
             .then(async (response) => {
