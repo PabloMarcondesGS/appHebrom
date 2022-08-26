@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, Text ,SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
+import { View, StyleSheet, Dimensions, Text ,SafeAreaView, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { Dropdown } from 'sharingan-rn-modal-dropdown';
@@ -44,7 +44,7 @@ export const PaymentReport: React.FC = () => {
                             onChange={() => {}}
                         />
                     </View>
-                    <RectButton style={styles.button} onPress={() => navigation.navigate('MainMenu')}>
+                    <RectButton style={styles.button} onPress={() => Alert.alert('Atenção', 'Não há IR a ser mostrado')}>
                         <Text style={styles.buttonText}>
                             ABRIR
                         </Text>
