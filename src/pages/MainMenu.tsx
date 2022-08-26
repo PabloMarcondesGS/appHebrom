@@ -36,10 +36,6 @@ export const MainMenu: React.FC = () => {
       const token = await AsyncStorage.getItem('tokenUser');
       const _contract = await AsyncStorage.getItem('contract');
       
-      if(_contract) {
-        setContract(_contract);
-      }
-
       api.post('/contratos', {} , {
         headers: { Authorization: `Bearer ${token}` }
       })
@@ -57,6 +53,13 @@ export const MainMenu: React.FC = () => {
           data.push(
             { label: nomePlano, value: `${codPlano}-${codContrato}` }
           )  
+        }
+        
+        if(_contract) {
+          setContract(_contract);
+        } else {
+          setContract(data[0].value);
+          await AsyncStorage.setItem('contract', data[0].value.split('-')[1].toString());
         }
         
         setDataContract(data);
