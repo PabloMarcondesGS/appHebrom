@@ -176,7 +176,7 @@ export const MainMenu: React.FC = () => {
                   Canais de Contato
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('DigitalCard')}>
+              <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Ombudsman')}>
                 <View style={styles.boxImg}>
                   <Image source={require('../assets/icons/Ouvidoria.png')} style={styles.cardImg} />
                 </View>
@@ -186,7 +186,7 @@ export const MainMenu: React.FC = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.line}>
-              <TouchableOpacity style={styles.card} onPress={() => {}}>
+              <TouchableOpacity style={styles.card} onPress={() => {navigation.navigate('CommonQuestions')}}>
                 <View style={styles.boxImg}>
                   <Image source={require('../assets/icons/Icones_Adicionar_dependentes-13.png')} style={styles.cardImg} />
                 </View>

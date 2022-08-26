@@ -84,7 +84,7 @@ export function CustomDrawer(props: any) {
               <View style={styles.line}>
                 <DrawerItem
                   style={styles.contentLine}
-                  label="Infotme para Declaração"
+                  label="Informe para Declaração"
                   icon={
                     () => (
                       <AntDesign
@@ -202,7 +202,7 @@ export function CustomDrawer(props: any) {
                   }
                   labelStyle={styles.textItem}
                   onPress={() => {
-                    // navigation.navigate('Screen1');
+                    navigation.navigate('Ombudsman');
                   }}
                 />
                 <View style={styles.underline} />

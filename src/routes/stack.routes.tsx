@@ -23,6 +23,8 @@ import { ReopeningCall } from '../pages/ReopeningCall';
 import { Contact } from '../pages/Contact';
 import { Research } from '../pages/Research';
 import { SelectedCard } from '../pages/SelectedCard';
+import { Ombudsman } from '../pages/Ombudsman';
+import { CommonQuestions } from '../pages/CommonQuestions';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -45,6 +47,7 @@ function DrawerRoute() {
         <Drawer.Screen name="ReopeningCall" component={ReopeningCall} />
         <Drawer.Screen name="Contact" component={Contact} />
         <Drawer.Screen name="Research" component={Research} />
+        <Drawer.Screen name="Ombudsman" component={Ombudsman} />
       </Drawer.Navigator>
   );
 }
@@ -69,6 +72,8 @@ function AppRoutes() {
         <Stack.Screen name="InvoiceDetails" component={InvoiceDetails} />
         <Stack.Screen name="Handoff" component={Handoff} />
         <Stack.Screen name="PaymentReport" component={PaymentReport} />
+        <Drawer.Screen name="Ombudsman" component={Ombudsman} />
+        <Drawer.Screen name="CommonQuestions" component={CommonQuestions} />
       </Stack.Navigator>
     </NavigationContainer>
   );
