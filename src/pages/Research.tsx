@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, Text ,SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
+import { View, StyleSheet, Dimensions, Text ,SafeAreaView, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { RadioButton, TextInput } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
@@ -43,7 +43,6 @@ export const Research: React.FC = () => {
                             },
                             
                         }}
-                        secureTextEntry={true}
                         style={styles.imput}
                     />
                 </View>
@@ -53,7 +52,7 @@ export const Research: React.FC = () => {
                             ANTERIOR 
                         </Text>
                     </RectButton>
-                    <RectButton style={styles.button} onPress={() => navigation.navigate('MainMenu')}>
+                    <RectButton style={styles.button} onPress={() => Alert.alert('Obrigado', 'Avaliação enviada com sucesso')}>
                         <Text style={styles.buttonText}>
                             FINALIZAR 
                         </Text>
