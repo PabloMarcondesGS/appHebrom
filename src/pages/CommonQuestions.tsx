@@ -21,7 +21,7 @@ export const CommonQuestions: React.FC = () => {
             <View style={styles.body}>
                 <Image source={require('../assets/logo.png')}  style={styles.logo}/>
                 <View style={styles.line}>
-                    <TouchableOpacity  style={styles.lineContents} onPress={() => Linking.openURL('https://api.cibernetsolutions.com.br:8443/mdsv/apex_dev/egus.web/Ouvidoria')}>
+                    <TouchableOpacity  style={styles.lineContents} onPress={() => Linking.openURL('https://api.cibernetsolutions.com.br:8443/mdsv/apex_dev/egus.web/perguntasFrequentes')}>
                         <Feather name="link" color={colors.gray60} size={24} style={styles.navBarIcon}  />
                         <Text style={{color: colors.gray60, fontSize: 18}}>Perguntas Frequentes</Text>
                     </TouchableOpacity>
