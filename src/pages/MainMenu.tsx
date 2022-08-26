@@ -59,7 +59,7 @@ export const MainMenu: React.FC = () => {
           setContract(_contract);
         } else {
           setContract(data[0].value);
-          await AsyncStorage.setItem('contract', data[0].value.split('-')[1].toString());
+          await AsyncStorage.setItem('contract', data[0].value);
         }
         
         setDataContract(data);
@@ -72,7 +72,7 @@ export const MainMenu: React.FC = () => {
 
   const onChange = async (value: string) => {
     setContract(value);
-    await AsyncStorage.setItem('contract', value.split('-')[1].toString());
+    await AsyncStorage.setItem('contract', value);
   }
 
   return (
