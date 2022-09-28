@@ -1,13 +1,62 @@
-import React from 'react';
-import { View, StyleSheet,Image, Dimensions, Text ,SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useLayoutEffect, useState } from 'react';
+import { View, StyleSheet,Image, Dimensions, Text ,SafeAreaView, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import { Feather, Ionicons, Entypo } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '../services/api';
+
+let contract;
+interface news {
+    "WhatsApp": string,
+    "TelAtend": string,
+    "Email": string,
+    "Endereco": string,
+    "Observacao": string,
+}
 
 export const Contact: React.FC = () => {
     const navigation = useNavigation();
+    const [ titles, setTitles ] = useState([]);
+    const [notFound, setNotFound] = useState('');
+
+    useLayoutEffect(() => {
+        const started = async () => {
+
+            const token = await AsyncStorage.getItem('tokenUser');
+            contract = await AsyncStorage.getItem('contract');
+            contract = contract?.split('-')[1].toString() ? contract?.split('-')[1].toString() : '9999';
+            api.post('/canaisDeContato', { contrato: `${contract}` } , {
+              headers: { Authorization: `Bearer ${token}` }
+            })
+            .then(async (response) => {
+                console.log(response.data)
+                if(response.data.erro) {
+                    Alert.alert('Ocorreu um erro.', response.data.erro);
+                    navigation.navigate('Signin');  
+                    return;
+                }
+                
+                if(response.data.resultado) {
+                    setNotFound(response.data);
+                }
+                
+                await AsyncStorage.setItem('tokenUser', response.data.token);
+                setTitles(response.data.Contatos);
+            });
+        }
+        started();
+    }, []);
+
+    const handleNextScream = async (WhatsApp: any, TelAtend: any, Email: any, Endereco: any, Observacao: any) => {
+        await AsyncStorage.setItem('WhatsApp', WhatsApp.toString());
+        await AsyncStorage.setItem('TelAtend', TelAtend.toString());
+        await AsyncStorage.setItem('Email', Email.toString());
+        await AsyncStorage.setItem('Endereco', Endereco.toString());
+        await AsyncStorage.setItem('Observacao', Observacao.toString());
+    }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -20,30 +69,28 @@ export const Contact: React.FC = () => {
             </View> 
             <View style={styles.body}>
                 <Image source={require('../assets/logo.png')}  style={styles.logo}/>
-                <TouchableOpacity style={styles.card}>
-                    <View style={styles.cardTitle}>
-                        <Text style={styles.cardTitleText}>
-                            Hebrom Admistradora De Beneficios
-                        </Text>
-                    </View>
-                    <View style={styles.cardContent}>
-                        <Ionicons name="attach" color={colors.blue93} size={25}  />
-                        <View style={styles.cardContentTexts}>
-                            <Text style={styles.cardContentText}>
-                                Avenida Hilario Pereira de Souza, 406 24° andar
-                            </Text>
-                            <Text style={styles.cardContentText}>
-                                - Industrial Autonomistas - Osasco - SP CEP 06010-170
-                            </Text>
-                            <Text style={styles.cardContentText}>
-                                Horário de funcionamento
-                            </Text>
-                            <Text style={styles.cardContentText}>
-                                Segunda a Quinta das 8h00 as 18h00 Sexta das 8h00 as 17h00 Sábado e Domingo Fechado
-                            </Text>
-                        </View>
-                    </View>
-                </TouchableOpacity>
+                {notFound? (
+                    <Text style={styles.notFoundText}>{notFound}</Text>
+                ):
+                    titles.map((data: news) => (
+                        <TouchableOpacity style={styles.card} onPress={() => handleNextScream(data.WhatsApp, data.TelAtend, data.Endereco, data.Email, data.Observacao)} key={data.WhatsApp}>
+                            <View style={styles.cardTitle}>
+                                <Text style={styles.cardTitleText}>
+                                    Hebrom Admistradora De Beneficios
+                                </Text>
+                            </View>
+                            <View style={styles.cardContent}>
+                                <TouchableOpacity style={styles.cardContentTexts} >
+                                    <Text style={styles.cardContentText}>WhatsApp: {data.WhatsApp}</Text>
+                                    <Text style={styles.cardContentText}>Tel: {data.TelAtend}</Text>
+                                    <Text style={styles.cardContentText}>E-mail: {data.Email}</Text>
+                                    <Text style={styles.cardContentText}>Endereço: {data.Endereco}</Text>
+                                    <Text style={styles.cardContentText}>OBS: {data.Observacao}</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </TouchableOpacity>
+                    )) 
+                }
             </View>
         </ScrollView>
     </SafeAreaView>
@@ -142,5 +189,10 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: colors.gray80,
         lineHeight: 18
+    },
+    notFoundText: {
+        fontFamily: fonts.medium,
+        fontSize: 22,
+        color: colors.gray180,
     },
   })

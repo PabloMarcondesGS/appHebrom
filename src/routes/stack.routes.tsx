@@ -25,6 +25,9 @@ import { Research } from '../pages/Research';
 import { SelectedCard } from '../pages/SelectedCard';
 import { Ombudsman } from '../pages/Ombudsman';
 import { CommonQuestions } from '../pages/CommonQuestions';
+import { PlansAndProducts } from '../pages/PlansAndProducts';
+import { TicketsandSuport } from '../pages/TicketsandSuport';
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -48,6 +51,8 @@ function DrawerRoute() {
         <Drawer.Screen name="Contact" component={Contact} />
         <Drawer.Screen name="Research" component={Research} />
         <Drawer.Screen name="Ombudsman" component={Ombudsman} />
+        <Drawer.Screen name="TicketsandSuport" component={TicketsandSuport} />
+
       </Drawer.Navigator>
   );
 }
@@ -74,6 +79,8 @@ function AppRoutes() {
         <Stack.Screen name="PaymentReport" component={PaymentReport} />
         <Drawer.Screen name="Ombudsman" component={Ombudsman} />
         <Drawer.Screen name="CommonQuestions" component={CommonQuestions} />
+        <Drawer.Screen name="PlansAndProducts" component={PlansAndProducts} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

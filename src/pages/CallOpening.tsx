@@ -25,9 +25,10 @@ export const CallOpening: React.FC = () => {
     useLayoutEffect(() => {
         const started = async () => {
             const token = await AsyncStorage.getItem('tokenUser');
-            const contract = await AsyncStorage.getItem('contract');
-      
-            api.post('/sac', { contrato: contract?.split('-')[1].toString() } , {
+            let contract = await AsyncStorage.getItem('contract');
+            contract = contract?.split('-')[1].toString() ? contract?.split('-')[1].toString() : '9999';
+            console.log(contract);
+            api.post('/sac', { contrato: `${contract}` } , {
               headers: { Authorization: `Bearer ${token}` }
             })
             .then(async (response) => {
@@ -52,16 +53,20 @@ export const CallOpening: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
+        <View style={styles.content}>
             <View style={styles.navBar}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
+                <TouchableOpacity onPress={() => navigation.navigate('MainMenu')}>
                     <Feather name="arrow-left" color={colors.white} size={30} style={styles.navBarIcon}  />
                 </TouchableOpacity>
                 <Text style={styles.navBarText}>Abertura de Chamados</Text>
             </View> 
             <View style={styles.body}>
+                
                 <Image source={require('../assets/logo.png')}  style={styles.logo}/>
+                <ScrollView style={styles.scrow}>
+
                 {release? calls.map((data: callDTO) => (
+
                     <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('ViewCalled')} key={data.codSacAtend}>
                         <View style={styles.cardTitle}>
                             <Text style={styles.cardTitleText}>
@@ -77,16 +82,20 @@ export const CallOpening: React.FC = () => {
                             <Ionicons name="arrow-redo-outline" color={colors.blue93} size={20}   />
                         </View>
                     </TouchableOpacity>
+
                 )): (
                     <Text style={styles.cardTitleText}>
                         Nenhum chamado encontrado
                     </Text>
                 )}
+                </ScrollView>
             </View>
-            <RectButton style={styles.btnCircle} onPress={() => navigation.navigate('Drawer')}>
-                <AntDesign name="plus" color="#fff" size={35} />
+            <RectButton style={styles.button} onPress={() => navigation.navigate('TicketsandSuport')}>
+                <Text style={styles.buttonText}>
+                    ABERTURA DE TICKET 
+                </Text>
             </RectButton>
-        </ScrollView>
+        </View>
     </SafeAreaView>
   );
 }
@@ -187,11 +196,30 @@ const styles = StyleSheet.create({
         width: 62, 
         height: 62, 
         backgroundColor: '#016881', 
-        borderRadius: 100, 
+        // borderRadius: 100, 
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
         bottom: '5%',
         right: -280
     },
+    button: {
+        width: '100%',
+        height: 55,
+        backgroundColor: colors.blue99,
+        justifyContent: 'center',
+        marginTop: 10,
+        borderRadius: 7
+    },
+    buttonText: {
+        textAlign: 'center',
+        fontFamily: fonts.regular,
+        fontSize: 16,
+        color: colors.white
+    },
+    scrow: {
+        flex: 1,
+        width: '90%',
+        height: '90%',
+      },
   })

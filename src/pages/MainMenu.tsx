@@ -160,7 +160,7 @@ export const MainMenu: React.FC = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.line}>
-              <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('DigitalCard')}>
+              <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('PlansAndProducts')}>
                 <View style={styles.boxImg}>
                   <Image source={require('../assets/icons/Produtos_e_Planos.png')} style={styles.cardImg} />
                 </View>
