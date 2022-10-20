@@ -1,71 +1,69 @@
-import * as React from 'react';
-import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import * as React from "react";
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import { Signin } from '../pages/Signin';
+import { Signin } from "../pages/Signin";
 // import { TermsAndConditions } from '../pages/TermsAndConditions';
-import { Signup } from '../pages/Signup';
-import { ForgotPassword } from '../pages/ForgotPassword';
-import { MainMenu } from '../pages/MainMenu';
-import CustomDrawer from '../components/CustomDrawer';
-import { DigitalCard } from '../pages/DigitalCard';
-import { Financial } from '../pages/Financial';
-import { InvoiceDetails } from '../pages/InvoiceDetails';
-import { BillingHistory } from '../pages/BillingHistory';
-import { Handoff } from '../pages/Handoff';
-import { PaymentReport } from '../pages/PaymentReport';
-import { MessagesAndNews } from '../pages/MessagesAndNews';
-import { CallOpening } from '../pages/CallOpening';
-import { ViewCalled } from '../pages/ViewCalled';
-import { ReopeningCall } from '../pages/ReopeningCall';
-import { Contact } from '../pages/Contact';
-import { Research } from '../pages/Research';
-import { SelectedCard } from '../pages/SelectedCard';
-import { Ombudsman } from '../pages/Ombudsman';
-import { CommonQuestions } from '../pages/CommonQuestions';
-import { PlansAndProducts } from '../pages/PlansAndProducts';
-import { TicketsandSuport } from '../pages/TicketsandSuport';
-
+import { Signup } from "../pages/Signup";
+import { ForgotPassword } from "../pages/ForgotPassword";
+import { MainMenu } from "../pages/MainMenu";
+import CustomDrawer from "../components/CustomDrawer";
+import { DigitalCard } from "../pages/DigitalCard";
+import { Financial } from "../pages/Financial";
+import { InvoiceDetails } from "../pages/InvoiceDetails";
+import { BillingHistory } from "../pages/BillingHistory";
+import { Handoff } from "../pages/Handoff";
+import { PaymentReport } from "../pages/PaymentReport";
+import { MessagesAndNews } from "../pages/MessagesAndNews";
+import { CallOpening } from "../pages/CallOpening";
+import { ViewCalled } from "../pages/ViewCalled";
+import { ReopeningCall } from "../pages/ReopeningCall";
+import { Contact } from "../pages/Contact";
+import { Research } from "../pages/Research";
+import { SelectedCard } from "../pages/SelectedCard";
+import { Ombudsman } from "../pages/Ombudsman";
+import { CommonQuestions } from "../pages/CommonQuestions";
+import { PlansAndProducts } from "../pages/PlansAndProducts";
+import { TicketsandSuport } from "../pages/TicketsandSuport";
+import { TicketType } from "../pages/TicketType";
+import { TicketSubType } from "../pages/TicketSubType";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function DrawerRoute() {
   return (
-      <Drawer.Navigator 
-        initialRouteName="Signin" 
-        drawerPosition='left'
-        drawerContent={(props) => <CustomDrawer {...props}  />}
-      >
-        <Drawer.Screen name="MainMenu" component={MainMenu}  />
-        {/* <Drawer.Screen name="TermsAndConditions" component={TermsAndConditions}  /> */}
-        <Drawer.Screen name="Signin" component={Signin} />
-        <Drawer.Screen name="DigitalCard" component={DigitalCard} />
-        <Drawer.Screen name="InvoiceDetails" component={InvoiceDetails} />
-        <Drawer.Screen name="MessagesAndNews" component={MessagesAndNews} />
-        <Drawer.Screen name="CallOpening" component={CallOpening} />
-        <Drawer.Screen name="ViewCalled" component={ViewCalled} />
-        <Drawer.Screen name="ReopeningCall" component={ReopeningCall} />
-        <Drawer.Screen name="Contact" component={Contact} />
-        <Drawer.Screen name="Research" component={Research} />
-        <Drawer.Screen name="Ombudsman" component={Ombudsman} />
-        <Drawer.Screen name="TicketsandSuport" component={TicketsandSuport} />
-
-      </Drawer.Navigator>
+    <Drawer.Navigator
+      initialRouteName="Signin"
+      drawerPosition="left"
+      drawerContent={(props) => <CustomDrawer {...props} />}
+    >
+      <Drawer.Screen name="MainMenu" component={MainMenu} />
+      {/* <Drawer.Screen name="TermsAndConditions" component={TermsAndConditions}  /> */}
+      <Drawer.Screen name="Signin" component={Signin} />
+      <Drawer.Screen name="DigitalCard" component={DigitalCard} />
+      <Drawer.Screen name="InvoiceDetails" component={InvoiceDetails} />
+      <Drawer.Screen name="MessagesAndNews" component={MessagesAndNews} />
+      <Drawer.Screen name="CallOpening" component={CallOpening} />
+      <Drawer.Screen name="ViewCalled" component={ViewCalled} />
+      <Drawer.Screen name="ReopeningCall" component={ReopeningCall} />
+      <Drawer.Screen name="Contact" component={Contact} />
+      <Drawer.Screen name="Research" component={Research} />
+      <Drawer.Screen name="Ombudsman" component={Ombudsman} />
+      <Drawer.Screen name="TicketsandSuport" component={TicketsandSuport} />
+      <Drawer.Screen name="TicketType" component={TicketType} />
+      <Drawer.Screen name="TicketSubType" component={TicketSubType} />
+    </Drawer.Navigator>
   );
 }
-
 
 function AppRoutes() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Drawer" headerMode="none">
-        <Stack.Screen 
-          name="MainMenu" 
-          component={MainMenu} 
-        />
+        <Stack.Screen name="MainMenu" component={MainMenu} />
         <Stack.Screen name="Signin" component={Signin} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
@@ -80,7 +78,6 @@ function AppRoutes() {
         <Drawer.Screen name="Ombudsman" component={Ombudsman} />
         <Drawer.Screen name="CommonQuestions" component={CommonQuestions} />
         <Drawer.Screen name="PlansAndProducts" component={PlansAndProducts} />
-
       </Stack.Navigator>
     </NavigationContainer>
   );
